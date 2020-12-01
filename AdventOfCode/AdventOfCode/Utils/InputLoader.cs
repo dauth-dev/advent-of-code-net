@@ -6,33 +6,33 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode.Utils
 {
-	public class InputLoader
-	{
-		const string BaseFolder = "..\\..\\..\\";
+    public class InputLoader
+    {
+        const string BaseFolder = "..\\..\\..\\";
 
-		public static InputLoader Instance => new InputLoader();
+        public static InputLoader Instance => new InputLoader();
 
-		private string getFileName(int year, int day, string file = "input")
-		{
-			return $"{BaseFolder}Day_{day}\\{file}.txt";
-		}
+        private string getFileName(int year, int day, string file = "input")
+        {
+            return $"{BaseFolder}Day_{day}\\{file}.txt";
+        }
 
-		public async Task<IEnumerable<long>> LoadInputAsEnumerableOfNumbers(int year, int day)
-		{
-			Logger.Log(Directory.GetCurrentDirectory());
+        public async Task<IEnumerable<long>> LoadInputAsEnumerableOfNumbers(int year, int day, string fileName = null)
+        {
+            Logger.Log(Directory.GetCurrentDirectory());
 
-			var file = getFileName(year, day);
-			var exists = File.Exists(file);
-			if (exists == false)
-			{
-				throw new FileNotFoundException($"Input file '{file}' was not found!");
-			}
+            var file = getFileName(year, day, fileName);
+            var exists = File.Exists(file);
+            if (exists == false)
+            {
+                throw new FileNotFoundException($"Input file '{file}' was not found!");
+            }
 
-			var lines = await File.ReadAllLinesAsync(file);
+            var lines = await File.ReadAllLinesAsync(file);
 
-			var numbers = lines.Select(long.Parse);
+            var numbers = lines.Select(long.Parse);
 
-			return numbers;
-		}
-	}
+            return numbers;
+        }
+    }
 }

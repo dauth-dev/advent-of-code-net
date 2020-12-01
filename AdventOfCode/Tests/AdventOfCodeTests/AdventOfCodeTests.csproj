@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\AdventOfCode\AdventOfCode.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Day_1\" />
+  </ItemGroup>
+
 </Project>

@@ -1,63 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AdventOfCode.Utils;
 
 namespace AdventOfCode
 {
-	class Run
+    class Run
     {
         static void Main(string[] args)
         {
+            var watch = Stopwatch.StartNew();
             var day1 = new Run();
             var orderdInput = day1.LoadInput().Result;
-            var result = day1.Process(orderdInput);
 
-            Logger.Log($"The Result is: {result}!");
+            var first = day1.FirstPart(orderdInput);
+            Logger.Log($"The Result for the first part is: {first}!");
+
+            var second = day1.SecondPart(orderdInput);
+            Logger.Log($"The Result for the second part is: {second}!");
+
+            Logger.Log($"Elapsed seconds: {watch.Elapsed.TotalSeconds}");
         }
 
-        private async Task<IEnumerable<long>> LoadInput()
+        private async Task<IEnumerable<long>> LoadInput(string inputFile = "input")
         {
-	        var input = await InputLoader.Instance.LoadInputAsEnumerableOfNumbers(2020, 1);
-            Logger.Log($"{input.Count()} Input numbers found!");
+            var input = await InputLoader.Instance.LoadInputAsEnumerableOfNumbers(2020, 1, inputFile);
+            Logger.Log($"{input.Count()} Input numbers found in file '{inputFile}'!");
 
             return input.OrderBy(i => i);
         }
 
-        private long Process(IEnumerable<long> input)
+        private long FirstPart(IEnumerable<long> input)
         {
-            long result = 0;
-            var array = input.ToArray();
-            var arrayHelper = new ArrayHelper();
+            var r = ArrayHelper.Instance.FindTwoItemsWith(input, (i, j) => i + j == 2020);
+            return r.Item1 * r.Item2;
+        }
 
-            var n = arrayHelper.FindTwoNumbers(array, (i, j) => (i + j) == 2020);
+        private long SecondPart(IEnumerable<long> input)
+        {
+            var r = ArrayHelper.Instance.FindThreeItemsWith(input, (i, j, k) => i + j + k == 2020);
 
-
-
-            for (int i = 0; i < array.Length-1; i++)
-            {
-                for (int j = array.Length-1; j > 0; j--) {
-                    
-                    for (int k = 0; k < array.Length -1; k++) {
-                        var first = array[i];
-                        var second = array[j];
-                        var third = array[k];
-
-                        if (first == second || second == third || first == third) continue;
-
-                        var sum = first + second + third;
-                        if (sum == 2020)
-                        {
-                            Logger.Log($"numbers found: {first} + {second} + {third} == 2020");
-                            result = first * second * third;
-                        }
-                    }
-                    
-                }
-                
-            }
-
-            return result;
+            return r.Item1 * r.Item2 * r.Item3;
         }
     }
 }
