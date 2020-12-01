@@ -26,9 +26,28 @@ namespace AdventOfCode
 
         private long Process(IEnumerable<long> input)
         {
-            // todo: ;-)
+            long result = 0;
+            var array = input.ToArray();
+            for (int i = 0; i < array.Length-1; i++)
+            {
+                for (int j = array.Length-1; j > 0; j--) {
+                    
+                    var first = array[i];
+                    var second = array[j];
 
-            return 42;
+                    if (first == second) continue;
+
+                    var sum = first + second;
+                    if (sum == 2020)
+                    {
+                        Logger.Log($"numbers found: {first} + {second} == 2020");
+                        result = first * second;
+                    }
+                }
+                
+            }
+
+            return result;
         }
     }
 }
