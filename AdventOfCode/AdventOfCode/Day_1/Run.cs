@@ -28,6 +28,12 @@ namespace AdventOfCode
         {
             long result = 0;
             var array = input.ToArray();
+            var arrayHelper = new ArrayHelper();
+
+            var n = arrayHelper.FindTwoNumbers(array, (i, j) => (i + j) == 2020);
+
+
+
             for (int i = 0; i < array.Length-1; i++)
             {
                 for (int j = array.Length-1; j > 0; j--) {
