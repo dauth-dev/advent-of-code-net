@@ -32,17 +32,21 @@ namespace AdventOfCode
             {
                 for (int j = array.Length-1; j > 0; j--) {
                     
-                    var first = array[i];
-                    var second = array[j];
+                    for (int k = 0; k < array.Length -1; k++) {
+                        var first = array[i];
+                        var second = array[j];
+                        var third = array[k];
 
-                    if (first == second) continue;
+                        if (first == second || second == third || first == third) continue;
 
-                    var sum = first + second;
-                    if (sum == 2020)
-                    {
-                        Logger.Log($"numbers found: {first} + {second} == 2020");
-                        result = first * second;
+                        var sum = first + second + third;
+                        if (sum == 2020)
+                        {
+                            Logger.Log($"numbers found: {first} + {second} + {third} == 2020");
+                            result = first * second * third;
+                        }
                     }
+                    
                 }
                 
             }
