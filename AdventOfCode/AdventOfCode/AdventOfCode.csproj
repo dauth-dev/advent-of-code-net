@@ -5,6 +5,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="Day_1\Models\" />
   </ItemGroup>
