@@ -1,18 +1,23 @@
-﻿using System.Linq;
-using AdventOfCode.Utils;
-using System;
+﻿using AdventOfCode.Core;
 using AdventOfCode.Day_2.Models;
+using AdventOfCode.Utils;
+using System.Linq;
 
 namespace AdventOfCode.Day_02
 {
     public class Runner : AbstractRunner
     {
+        private readonly IInputLoader inputLoader;
 
-        public Runner() : base(2) { }
+        public Runner(IInputLoader inputLoader) : base(2)
+        {
+            this.inputLoader = inputLoader;
+        }
+
 
         protected override void Process()
         {
-            var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(2020, 2);
+            var input = inputLoader.LoadInputAsEnumerableOfStrings(Day);
 
             var validInputCounts = input.Select(i => Mapper.MapToPolicy<Policy_Part_1>(i))
                 .Where(t => t.Item1.IsValid(t.Item2))

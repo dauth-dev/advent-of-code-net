@@ -1,13 +1,8 @@
 ﻿using AdventOfCode.Utils;
 using System.Diagnostics;
 
-namespace AdventOfCode
+namespace AdventOfCode.Core
 {
-    public interface IRunner
-    {
-        void Run();
-    }
-
     public abstract class AbstractRunner : IRunner
     {
 

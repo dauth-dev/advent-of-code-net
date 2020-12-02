@@ -3,43 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace AdventOfCode.Utils
 {
-    public class InputLoader
+    public class InputLoader : IInputLoader, IInputLoader1
     {
         private const string BaseFolder = "..\\..\\..\\";
 
-        public static InputLoader Instance => new InputLoader();
-
-        private string getFileName(int year, int day, string file = null)
+        private string getFileName(int day, string file = null)
         {
-            file ??= "input";
+            file ??= $"{Environment.UserName}-input";
             if (Environment.UserName == "Markus.Lind")
             {
-                file += "_ml";
+                file = "input_ml";
             }
+
             return $"{BaseFolder}Day_{day}\\{file}.txt";
         }
 
-        public async Task<IEnumerable<long>> LoadInputAsEnumerableOfNumbers(int year, int day, string fileName = null)
+        private IEnumerable<string> ReadAllLines(int day, string fileName = null)
         {
             Logger.Log(Directory.GetCurrentDirectory());
 
-            var file = getFileName(year, day, fileName);
-            var exists = File.Exists(file);
-            if (exists == false)
+            var file = getFileName(day, fileName);
+            if (!File.Exists(file))
             {
                 throw new FileNotFoundException($"Input file '{file}' was not found!");
             }
 
-            var lines = await File.ReadAllLinesAsync(file);
-
-            var numbers = lines.Select(long.Parse);
-
-            return numbers;
+            return File.ReadAllLines(file);
         }
 
         public string LoadInputAsText(int year, int day, string fileName = null)
@@ -67,7 +59,6 @@ namespace AdventOfCode.Utils
                 throw new FileNotFoundException($"Input file '{file}' was not found!");
             }
 
-            var lines = File.ReadAllLines(file);
 
             return lines;
         }

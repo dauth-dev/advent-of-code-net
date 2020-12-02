@@ -1,18 +1,20 @@
-﻿using System.Linq;
+﻿using AdventOfCode.Core;
 using AdventOfCode.Utils;
-using System;
-using AdventOfCode.Day_2.Models;
 
 namespace AdventOfCode.Day_03
 {
     public class Runner : AbstractRunner
     {
+        private readonly IInputLoader inputLoader;
 
-        public Runner() : base(3) { }
+        public Runner(IInputLoader inputLoader) : base(3)
+        {
+            this.inputLoader = inputLoader;
+        }
 
         protected override void Process()
         {
-            var input = InputLoader.Instance.LoadInputAsBitMatrix(2020, 3);
+            var input = inputLoader.LoadInputAsBitMatrix(2020, 3);
 
             int hits = BitArrayHelper.countHitsBySearchPattern(input, 0, 0, 1, 3);
             int hits2 = BitArrayHelper.countHitsBySearchPattern(input, 0, 0, 1, 1);
