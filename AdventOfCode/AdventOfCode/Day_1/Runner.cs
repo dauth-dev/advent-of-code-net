@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AdventOfCode.Day1
+namespace AdventOfCode.Day_01
 {
     public class Runner : AbstractRunner
     {

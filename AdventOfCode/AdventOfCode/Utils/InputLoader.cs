@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -15,6 +16,10 @@ namespace AdventOfCode.Utils
         private string getFileName(int year, int day, string file = null)
         {
             file ??= "input";
+            if (Environment.UserName == "Markus.Lind")
+            {
+                file += "_ml";
+            }
             return $"{BaseFolder}Day_{day}\\{file}.txt";
         }
 
