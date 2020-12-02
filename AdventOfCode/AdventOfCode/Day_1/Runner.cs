@@ -1,28 +1,14 @@
-﻿using System;
+﻿using AdventOfCode.Utils;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using AdventOfCode.Utils;
 
-namespace AdventOfCode
+namespace AdventOfCode.Day1
 {
-    class Run
+    public class Runner : AbstractRunner
     {
-        static void Main(string[] args)
-        {
-            var watch = Stopwatch.StartNew();
-            var day1 = new Run();
-            var orderdInput = day1.LoadInput().Result;
-
-            var first = day1.FirstPart(orderdInput);
-            Logger.Log($"The Result for the first part is: {first}!");
-
-            var second = day1.SecondPart(orderdInput);
-            Logger.Log($"The Result for the second part is: {second}!");
-
-            Logger.Log($"Elapsed seconds: {watch.Elapsed.TotalSeconds}");
-        }
+        public Runner() : base(1) { }
 
         private async Task<IEnumerable<long>> LoadInput(string inputFile = "input")
         {
@@ -43,6 +29,20 @@ namespace AdventOfCode
             var r = ArrayHelper.Instance.FindThreeItemsWith(input, (i, j, k) => i + j + k == 2020);
 
             return r.Item1 * r.Item2 * r.Item3;
+        }
+
+        protected override void Process()
+        {
+            var watch = Stopwatch.StartNew();
+            var orderdInput = LoadInput().Result;
+
+            var first = FirstPart(orderdInput);
+            Logger.Log($"The Result for the first part is: {first}!");
+
+            var second = SecondPart(orderdInput);
+            Logger.Log($"The Result for the second part is: {second}!");
+
+            Logger.Log($"Elapsed seconds: {watch.Elapsed.TotalSeconds}");
         }
     }
 }

@@ -12,8 +12,9 @@ namespace AdventOfCode.Utils
 
         public static InputLoader Instance => new InputLoader();
 
-        private string getFileName(int year, int day, string file = "input")
+        private string getFileName(int year, int day, string file = null)
         {
+            file ??= "input";
             return $"{BaseFolder}Day_{day}\\{file}.txt";
         }
 
@@ -33,6 +34,22 @@ namespace AdventOfCode.Utils
             var numbers = lines.Select(long.Parse);
 
             return numbers;
+        }
+
+        public IEnumerable<string> LoadInputAsEnumerableOfStrings(int year, int day, string fileName = null)
+        {
+            Logger.Log(Directory.GetCurrentDirectory());
+
+            var file = getFileName(year, day, fileName);
+            var exists = File.Exists(file);
+            if (exists == false)
+            {
+                throw new FileNotFoundException($"Input file '{file}' was not found!");
+            }
+
+            var lines = File.ReadAllLines(file);
+
+            return lines;
         }
     }
 }
