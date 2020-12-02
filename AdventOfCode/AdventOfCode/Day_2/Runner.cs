@@ -3,7 +3,7 @@ using AdventOfCode.Utils;
 using System;
 using AdventOfCode.Day_2.Models;
 
-namespace AdventOfCode.Day_2
+namespace AdventOfCode.Day_02
 {
     public class Runner : AbstractRunner
     {
