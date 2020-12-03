@@ -1,5 +1,6 @@
 ﻿using AdventOfCode.Core;
 using AdventOfCode.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace AdventOfCode.Day_03
 {
@@ -7,14 +8,14 @@ namespace AdventOfCode.Day_03
     {
         private readonly IInputLoader inputLoader;
 
-        public Runner(IInputLoader inputLoader) : base(3)
+        public Runner(IInputLoader inputLoader, ILogger<Runner> logger) : base(3, logger)
         {
             this.inputLoader = inputLoader;
         }
 
         protected override void Process()
         {
-            var input = inputLoader.LoadInputAsBitMatrix(2020, 3);
+            var input = inputLoader.LoadInputAsBitMatrix(3);
 
             int hits = BitArrayHelper.countHitsBySearchPattern(input, 0, 0, 1, 3);
             int hits2 = BitArrayHelper.countHitsBySearchPattern(input, 0, 0, 1, 1);

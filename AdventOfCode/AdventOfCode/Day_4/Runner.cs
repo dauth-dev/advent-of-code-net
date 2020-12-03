@@ -1,25 +1,24 @@
-﻿using System.Linq;
-using AdventOfCode.Utils;
-using System;
-using AdventOfCode.Day_2.Models;
+﻿using System;
 using System.Collections.Generic;
-
-using System.Linq;
-
-using MoreLinq;
 using System.Text.RegularExpressions;
+using AdventOfCode.Core;
+using AdventOfCode.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace AdventOfCode.Day_04
 {
     public class Runner : AbstractRunner
     {
-        public Runner() : base(4)
+        private readonly IInputLoader inputLoader;
+
+        public Runner(ILogger<AbstractRunner> logger, IInputLoader inputLoader) : base(4, logger)
         {
+            this.inputLoader = inputLoader;
         }
 
         protected override void Process()
         {
-            var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(2020, 4);
+            var input = inputLoader.LoadInputAsEnumerableOfStrings(4);
 
             var resultFirst = GetValidPassports(input);
             Console.WriteLine($"Valid passports: {resultFirst.Count}");

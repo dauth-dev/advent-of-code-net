@@ -3,42 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace AdventOfCode.Utils
 {
-    public class InputLoader : IInputLoader, IInputLoader1
+    public class InputLoader : IInputLoader
     {
-        private const string BaseFolder = "..\\..\\..\\";
+        public InputLoader(IOptions<AppSettings> appSettings, ILogger<InputLoader> logger)
+        {
+            this.appSettings = appSettings?.Value ?? throw new ArgumentNullException(nameof(appSettings));
+            this.logger = logger;
+        }
+
+        const string BaseFolder = "..\\..\\..\\";
+        private readonly AppSettings appSettings;
+        private readonly ILogger<InputLoader> logger;
 
         private string getFileName(int day, string file = null)
         {
             file ??= $"{Environment.UserName}-input";
-            if (Environment.UserName == "Markus.Lind")
+
+            if (this.appSettings.UserInputFileNameMappingOverride.ContainsKey(Environment.UserName))
             {
-                file = "input_ml";
+                file = this.appSettings.UserInputFileNameMappingOverride[Environment.UserName];
             }
+
 
             return $"{BaseFolder}Day_{day}\\{file}.txt";
         }
 
         private IEnumerable<string> ReadAllLines(int day, string fileName = null)
         {
-            Logger.Log(Directory.GetCurrentDirectory());
-
             var file = getFileName(day, fileName);
             if (!File.Exists(file))
             {
-                throw new FileNotFoundException($"Input file '{file}' was not found!");
+                throw new FileNotFoundException($"Input file '{file}' was not found in folder '{Directory.GetCurrentDirectory()}'!");
             }
 
             return File.ReadAllLines(file);
         }
 
-        public string LoadInputAsText(int year, int day, string fileName = null)
+        public string LoadInputAsText(int day, string fileName = null)
         {
-            Logger.Log(Directory.GetCurrentDirectory());
+            logger.LogInformation(Directory.GetCurrentDirectory());
 
-            var file = getFileName(year, day, fileName);
+            var file = getFileName(day, fileName);
             var exists = File.Exists(file);
             if (exists == false)
             {
@@ -48,26 +58,16 @@ namespace AdventOfCode.Utils
             return File.ReadAllText(file);
         }
 
-        public IEnumerable<string> LoadInputAsEnumerableOfStrings(int year, int day, string fileName = null)
+        public IEnumerable<string> LoadInputAsEnumerableOfStrings(int day, string fileName = null)
         {
-            Logger.Log(Directory.GetCurrentDirectory());
-
-            var file = getFileName(year, day, fileName);
-            var exists = File.Exists(file);
-            if (exists == false)
-            {
-                throw new FileNotFoundException($"Input file '{file}' was not found!");
-            }
-
-
-            return lines;
+            return ReadAllLines(day, fileName);
         }
 
-        public List<BitArray> LoadInputAsBitMatrix(int year, int day, string fileName = null, string falseChar = ".", string trueChar = "#")
+        public List<BitArray> LoadInputAsBitMatrix(int day, string fileName = null, string falseChar = ".", string trueChar = "#")
         {
-            Logger.Log(Directory.GetCurrentDirectory());
+            logger.LogInformation(Directory.GetCurrentDirectory());
 
-            var file = getFileName(year, day, fileName);
+            var file = getFileName(day, fileName);
             var exists = File.Exists(file);
             if (exists == false)
             {
@@ -93,6 +93,11 @@ namespace AdventOfCode.Utils
             }
 
             return bitMatrix;
+        }
+
+        public IEnumerable<long> LoadInputAsEnumerableOfNumbers(int day, string fileNameOverride = null)
+        {
+            return ReadAllLines(day, fileNameOverride).Select(l => long.Parse(l));
         }
     }
 }

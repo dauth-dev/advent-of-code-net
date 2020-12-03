@@ -1,14 +1,17 @@
 ﻿using AdventOfCode.Utils;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace AdventOfCode.Core
 {
     public abstract class AbstractRunner : IRunner
     {
+        protected ILogger<AbstractRunner> Logger { get; }
 
-        public AbstractRunner(int day)
+        public AbstractRunner(int day, ILogger<AbstractRunner> logger)
         {
             Day = day;
+            this.Logger = logger;
         }
 
         public int Day { get; }
@@ -16,17 +19,17 @@ namespace AdventOfCode.Core
         public void Run()
         {
             var watch = Stopwatch.StartNew();
-            Logger.Log($"===========================");
-            Logger.Log($"processing Day {Day }...");
-            Logger.Log($"===========================");
+            Logger.LogInformation($"===========================");
+            Logger.LogInformation($"processing Day {Day }...");
+            Logger.LogInformation($"===========================");
 
             this.Process();
 
             watch.Stop();
 
-            Logger.Log($"===========================");
-            Logger.Log($"Elapsed Seconds: {watch.Elapsed.TotalSeconds}");
-            Logger.Log($"===========================");
+            Logger.LogInformation($"===========================");
+            Logger.LogInformation($"Elapsed Seconds: {watch.Elapsed.TotalSeconds}");
+            Logger.LogInformation($"===========================");
 
         }
 

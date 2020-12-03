@@ -1,5 +1,6 @@
 ﻿using AdventOfCode.Core;
 using AdventOfCode.Utils;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +11,7 @@ namespace AdventOfCode.Day_01
         private readonly IInputLoader inputLoader;
         private readonly IArrayHelper arrayHelper;
 
-        public Runner(IInputLoader inputLoader, IArrayHelper arrayHelper) : base(1)
+        public Runner(IInputLoader inputLoader, IArrayHelper arrayHelper, ILogger<Runner> logger) : base(1, logger)
         {
             this.inputLoader = inputLoader;
             this.arrayHelper = arrayHelper;
@@ -19,7 +20,7 @@ namespace AdventOfCode.Day_01
         private IEnumerable<long> LoadInput()
         {
             var input = inputLoader.LoadInputAsEnumerableOfNumbers(Day);
-            Logger.Log($"{input.Count()} Input numbers found!");
+            Logger.LogInformation($"{input.Count()} Input numbers found!");
 
             return input.OrderBy(i => i);
         }
@@ -42,10 +43,10 @@ namespace AdventOfCode.Day_01
             var orderdInput = LoadInput();
 
             var first = FirstPart(orderdInput);
-            Logger.Log($"The Result for the first part is: {first}!");
+            Logger.LogInformation($"The Result for the first part is: {first}!");
 
             var second = SecondPart(orderdInput);
-            Logger.Log($"The Result for the second part is: {second}!");
+            Logger.LogInformation($"The Result for the second part is: {second}!");
         }
     }
 }
