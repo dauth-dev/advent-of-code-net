@@ -8,14 +8,14 @@ namespace AdventOfCode.Day_03
     {
         private readonly IInputLoader inputLoader;
 
-        public Runner(IInputLoader inputLoader, ILogger<Runner> logger) : base(3, logger)
+        public Runner(IInputLoader inputLoader, ILogger<Runner> logger) : base("03", logger)
         {
             this.inputLoader = inputLoader;
         }
 
         protected override void Process()
         {
-            var input = inputLoader.LoadInputAsBitMatrix(3);
+            var input = inputLoader.LoadInputAsBitMatrix("03");
 
             int hits = BitArrayHelper.countHitsBySearchPattern(input, 0, 0, 1, 3);
             int hits2 = BitArrayHelper.countHitsBySearchPattern(input, 0, 0, 1, 1);

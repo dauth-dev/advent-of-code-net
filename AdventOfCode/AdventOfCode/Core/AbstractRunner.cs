@@ -7,14 +7,14 @@ namespace AdventOfCode.Core
     {
         protected ILogger<AbstractRunner> Logger { get; }
 
-        protected AbstractRunner(int day, ILogger<AbstractRunner> logger)
+        protected AbstractRunner(string day, ILogger<AbstractRunner> logger)
         {
             Day = day;
             IsActive = false;
             this.Logger = logger;
         }
 
-        public int Day { get; }
+        public string Day { get; }
         public bool IsActive { get; protected set; }
 
         public void Run()

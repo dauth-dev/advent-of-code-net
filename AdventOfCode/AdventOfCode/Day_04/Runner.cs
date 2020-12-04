@@ -11,7 +11,7 @@ namespace AdventOfCode.Day_04
     {
         private readonly IInputLoader inputLoader;
 
-        public Runner(ILogger<AbstractRunner> logger, IInputLoader inputLoader) : base(4, logger)
+        public Runner(ILogger<AbstractRunner> logger, IInputLoader inputLoader) : base("04", logger)
         {
             this.inputLoader = inputLoader;
             IsActive = true;
@@ -19,7 +19,7 @@ namespace AdventOfCode.Day_04
 
         protected override void Process()
         {
-            var input = inputLoader.LoadInputAsEnumerableOfStrings(4);
+            var input = inputLoader.LoadInputAsEnumerableOfStrings(Day);
 
             var resultFirst = GetValidPassports(input);
             Console.WriteLine($"Valid passports: {resultFirst.Count}");

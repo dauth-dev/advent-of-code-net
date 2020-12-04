@@ -11,7 +11,7 @@ namespace AdventOfCode.Day_01
         private readonly IInputLoader inputLoader;
         private readonly IArrayHelper arrayHelper;
 
-        public Runner(IInputLoader inputLoader, IArrayHelper arrayHelper, ILogger<Runner> logger) : base(1, logger)
+        public Runner(IInputLoader inputLoader, IArrayHelper arrayHelper, ILogger<Runner> logger) : base("01", logger)
         {
             this.inputLoader = inputLoader;
             this.arrayHelper = arrayHelper;

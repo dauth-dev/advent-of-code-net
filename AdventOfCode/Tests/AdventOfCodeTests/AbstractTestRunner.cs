@@ -44,7 +44,7 @@ namespace AdventOfCodeTests
         }
 
 
-        protected IRunner GetRunnerForDay(int day) => container.Resolve<RunnerStarter>().GetRunnerForDay(day);
+        protected IRunner GetRunnerForDay(string day) => container.Resolve<RunnerStarter>().GetRunnerForDay(day);
 
         protected T GetRunner<T>() where T : IRunner => container.Resolve<T>();
     }

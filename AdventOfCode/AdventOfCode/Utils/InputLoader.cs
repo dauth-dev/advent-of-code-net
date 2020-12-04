@@ -20,7 +20,7 @@ namespace AdventOfCode.Utils
         private readonly AppSettings appSettings;
         private readonly ILogger<InputLoader> logger;
 
-        private string getFileName(int day, string file = null)
+        private string getFileName(string day, string file = null)
         {
             file ??= $"{Environment.UserName}-input";
 
@@ -33,7 +33,7 @@ namespace AdventOfCode.Utils
             return $"{BaseFolder}Day_{day}\\{file}.txt";
         }
 
-        private IEnumerable<string> ReadAllLines(int day, string fileName = null)
+        private IEnumerable<string> ReadAllLines(string day, string fileName = null)
         {
             var file = getFileName(day, fileName);
             if (!File.Exists(file))
@@ -44,7 +44,7 @@ namespace AdventOfCode.Utils
             return File.ReadAllLines(file);
         }
 
-        public string LoadInputAsText(int day, string fileName = null)
+        public string LoadInputAsText(string day, string fileName = null)
         {
             logger.LogInformation(Directory.GetCurrentDirectory());
 
@@ -58,12 +58,12 @@ namespace AdventOfCode.Utils
             return File.ReadAllText(file);
         }
 
-        public IEnumerable<string> LoadInputAsEnumerableOfStrings(int day, string fileName = null)
+        public IEnumerable<string> LoadInputAsEnumerableOfStrings(string day, string fileName = null)
         {
             return ReadAllLines(day, fileName);
         }
 
-        public List<BitArray> LoadInputAsBitMatrix(int day, string fileName = null, string falseChar = ".", string trueChar = "#")
+        public List<BitArray> LoadInputAsBitMatrix(string day, string fileName = null, string falseChar = ".", string trueChar = "#")
         {
             logger.LogInformation(Directory.GetCurrentDirectory());
 
@@ -95,7 +95,7 @@ namespace AdventOfCode.Utils
             return bitMatrix;
         }
 
-        public IEnumerable<long> LoadInputAsEnumerableOfNumbers(int day, string fileNameOverride = null)
+        public IEnumerable<long> LoadInputAsEnumerableOfNumbers(string day, string fileNameOverride = null)
         {
             return ReadAllLines(day, fileNameOverride).Select(l => long.Parse(l));
         }

@@ -8,17 +8,17 @@ namespace AdventOfCode.Day_05
     {
         private readonly IInputLoader inputLoader;
 
-        public Runner(ILogger<AbstractRunner> logger, IInputLoader inputLoader) : base(5, logger)
+        public Runner(ILogger<AbstractRunner> logger, IInputLoader inputLoader) : base("05", logger)
         {
             this.inputLoader = inputLoader;
-            
+
         }
 
         protected override void Process()
         {
-            
+
         }
 
-        
+
     }
 }

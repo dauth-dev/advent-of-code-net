@@ -18,8 +18,8 @@ namespace AdventOfCode
 
         public void StartLatestRunner() => GetActiveRunners().OrderBy(r => r.Day).Last().Run();
 
-        public void StartRunnerForDay(int day) => GetRunnerForDay(day).Run();
+        public void StartRunnerForDay(string day) => GetRunnerForDay(day).Run();
 
-        public IRunner GetRunnerForDay(int day) => runners.First(r => r.Day == day);
+        public IRunner GetRunnerForDay(string day) => runners.First(r => r.Day == day);
     }
 }

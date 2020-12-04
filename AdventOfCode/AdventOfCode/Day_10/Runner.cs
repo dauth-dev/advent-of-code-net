@@ -8,7 +8,7 @@ namespace AdventOfCode.Day_10
     {
         private readonly IInputLoader inputLoader;
 
-        public Runner(ILogger<AbstractRunner> logger, IInputLoader inputLoader) : base(10, logger)
+        public Runner(ILogger<AbstractRunner> logger, IInputLoader inputLoader) : base("10", logger)
         {
             this.inputLoader = inputLoader;
         }

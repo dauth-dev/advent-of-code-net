@@ -2,7 +2,7 @@
 {
     public interface IRunner
     {
-        int Day { get; }
+        string Day { get; }
         bool IsActive { get; }
         void Run();
     }
