@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -56,5 +57,38 @@ namespace AdventOfCode.Utils
 
             return lines;
         }
+
+        public List<BitArray> LoadInputAsBitMatrix(int year, int day, string fileName = null, string falseChar = ".", string trueChar = "#")
+        {
+            Logger.Log(Directory.GetCurrentDirectory());
+
+            var file = getFileName(year, day, fileName);
+            var exists = File.Exists(file);
+            if (exists == false)
+            {
+                throw new FileNotFoundException($"Input file '{file}' was not found!");
+            }
+
+            var lines = File.ReadLines(file);
+            List<BitArray> bitMatrix = new List<BitArray>();
+
+            foreach(string line in lines)
+            {
+                var test = line;
+                test = test.Replace(falseChar, "0").Replace(trueChar, "1");
+                var bitArray = new BitArray(test.Length, false);
+                for (int j=0; j<test.Length;j++)
+                {
+                    if (test[j].ToString() == "1")
+                    {
+                        bitArray[j] = true;
+                    }
+                }
+                bitMatrix.Add(bitArray);
+            }
+
+            return bitMatrix;
+        }
+
     }
 }

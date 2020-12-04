@@ -7,7 +7,8 @@ namespace AdventOfCode
     {
         private IList<IRunner> runners = new List<IRunner>() {
             new Day_01.Runner(),
-            new Day_02.Runner()
+            new Day_02.Runner(),
+            new Day_03.Runner()
         };
 
         public static void Main()
