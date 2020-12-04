@@ -14,7 +14,9 @@ namespace AdventOfCode
             this.runners = runners;
         }
 
-        public void StartLatestRunner() => runners.OrderBy(r => r.Day).Last().Run();
+        private IEnumerable<IRunner> GetActiveRunners() => runners.Where(r => r.IsActive);
+
+        public void StartLatestRunner() => GetActiveRunners().OrderBy(r => r.Day).Last().Run();
 
         public void StartRunnerForDay(int day) => GetRunnerForDay(day).Run();
 

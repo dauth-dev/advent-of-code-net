@@ -14,6 +14,7 @@ namespace AdventOfCode.Day_04
         public Runner(ILogger<AbstractRunner> logger, IInputLoader inputLoader) : base(4, logger)
         {
             this.inputLoader = inputLoader;
+            IsActive = true;
         }
 
         protected override void Process()

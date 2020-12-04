@@ -1,6 +1,5 @@
-﻿using AdventOfCode.Utils;
+﻿using System.Diagnostics;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 
 namespace AdventOfCode.Core
 {
@@ -8,13 +7,15 @@ namespace AdventOfCode.Core
     {
         protected ILogger<AbstractRunner> Logger { get; }
 
-        public AbstractRunner(int day, ILogger<AbstractRunner> logger)
+        protected AbstractRunner(int day, ILogger<AbstractRunner> logger)
         {
             Day = day;
+            IsActive = false;
             this.Logger = logger;
         }
 
         public int Day { get; }
+        public bool IsActive { get; protected set; }
 
         public void Run()
         {

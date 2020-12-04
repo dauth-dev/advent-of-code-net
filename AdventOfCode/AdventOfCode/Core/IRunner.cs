@@ -3,6 +3,7 @@
     public interface IRunner
     {
         int Day { get; }
+        bool IsActive { get; }
         void Run();
     }
 }

@@ -11,7 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Day_1\Models\" />
+		<Folder Include="Day_01\Models\" />
 	</ItemGroup>
 
 	<ItemGroup>
