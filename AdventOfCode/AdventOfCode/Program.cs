@@ -7,9 +7,9 @@ using Serilog;
 
 namespace AdventOfCode
 {
-    internal class Program
+    internal static class Program
     {
-        internal static IServiceProvider ServiceProvider { get; private set; }
+        private static IServiceProvider ServiceProvider { get; set; }
 
         public static void Main()
         {
@@ -18,7 +18,7 @@ namespace AdventOfCode
             ConfigureServices(services);
 
             ServiceProvider = ConfigureContainer(services);
-            ServiceProvider.GetService<App>().Run();
+            ServiceProvider.GetService<App>()?.Run();
         }
 
         private static void ConfigureServices(IServiceCollection services)
