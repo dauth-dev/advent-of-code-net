@@ -3,12 +3,13 @@ using System.Linq;
 
 namespace AdventOfCode
 {
-    class MainRunner
+    internal class MainRunner
     {
         private IList<IRunner> runners = new List<IRunner>() {
             new Day_01.Runner(),
             new Day_02.Runner(),
-            new Day_03.Runner()
+            new Day_03.Runner(),
+             new Day_04.Runner()
         };
 
         public static void Main()
