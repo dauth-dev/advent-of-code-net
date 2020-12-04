@@ -35,6 +35,15 @@ namespace AdventOfCode.Day_04
             {
                 var valid = true;
 
+                //(Birth Year)
+                //iyr(Issue Year)
+                //eyr(Expiration Year)
+                //hgt(Height)
+                //hcl(Hair Color)
+                //ecl(Eye Color)
+                //pid(Passport ID)
+                //cid(Country ID)
+
                 if (!CheckYear(item["byr"], 1920, 2002))
                 {
                     continue;
@@ -143,7 +152,7 @@ namespace AdventOfCode.Day_04
                 currentValid = true;
                 foreach (var requiredField in exceptedFields)
                 {
-                    if (passport.ContainsKey(requiredField) == false)
+                    if (!passport.ContainsKey(requiredField))
                     {
                         currentValid = false;
                     }
