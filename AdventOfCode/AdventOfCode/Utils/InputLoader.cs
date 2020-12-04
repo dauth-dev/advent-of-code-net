@@ -22,7 +22,7 @@ namespace AdventOfCode.Utils
 
         private string getFileName(string day, string file = null)
         {
-            file ??= $"{Environment.UserName}-input";
+            file ??= $"input";
 
             if (this.appSettings.UserInputFileNameMappingOverride.ContainsKey(Environment.UserName))
             {
