@@ -7,6 +7,9 @@
       <FixtureTestSelector>
         <FixtureName>AdventOfCodeTests.Utils.ArrayHelperTest</FixtureName>
       </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>AdventOfCodeTests.Utils.Day_5_Test</FixtureName>
+      </FixtureTestSelector>
     </IgnoredTests>
   </Settings>
 </ProjectConfiguration>
