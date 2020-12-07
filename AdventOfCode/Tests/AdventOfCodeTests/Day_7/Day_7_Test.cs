@@ -32,9 +32,6 @@ namespace AdventOfCodeTests.Utils
             Assert.AreEqual("striped yellow", bag.bags[3].Name);
             Assert.AreEqual(4, bag.bags[3].Count);
             Assert.AreEqual(4, bag.bags.Count);
-
-            var input = runner.GetBagMatrix(File.ReadAllLines(Path.Combine("Day_7", "inputTest.txt")));
-            Assert.AreEqual(11, input.Count);
         }
 
         [TestMethod]
