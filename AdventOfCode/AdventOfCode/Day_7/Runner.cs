@@ -1,13 +1,7 @@
-﻿using System.Linq;
-using AdventOfCode.Utils;
-using System;
-using AdventOfCode.Day_2.Models;
+﻿using System;
 using System.Collections.Generic;
-
 using System.Linq;
-
-using MoreLinq;
-using System.Text.RegularExpressions;
+using AdventOfCode.Utils;
 
 namespace AdventOfCode.Day_07
 {
@@ -19,7 +13,7 @@ namespace AdventOfCode.Day_07
 
         protected override void Process()
         {
-            var input = GetBagMatrix(InputLoader.Instance.LoadInputAsEnumerableOfStrings(2020, 7));
+            var input = GetBagMatrix(InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day));
             var result = GetResult(input, "shiny gold");
             Console.WriteLine($"First result: {result}");
             result = GetSecondResult(input, "shiny gold");

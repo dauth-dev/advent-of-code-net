@@ -1,13 +1,7 @@
-﻿using System.Linq;
-using AdventOfCode.Utils;
-using System;
-using AdventOfCode.Day_2.Models;
+﻿using System;
 using System.Collections.Generic;
-
-using System.Linq;
-
-using MoreLinq;
 using System.Text.RegularExpressions;
+using AdventOfCode.Utils;
 
 namespace AdventOfCode.Day_04
 {
@@ -19,7 +13,7 @@ namespace AdventOfCode.Day_04
 
         protected override void Process()
         {
-            var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(2020, 4);
+            var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day);
 
             var resultFirst = GetValidPassports(input);
             Console.WriteLine($"Valid passports: {resultFirst.Count}");

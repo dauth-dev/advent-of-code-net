@@ -12,7 +12,7 @@ namespace AdventOfCode.Day_03
 
         protected override void Process()
         {
-            var input = InputLoader.Instance.LoadInputAsBitMatrix(2020, 3);
+            var input = InputLoader.Instance.LoadInputAsBitMatrix(Day);
 
             int hits = BitArrayHelper.countHitsBySearchPattern(input, 0, 0, 1, 3);
             int hits2 = BitArrayHelper.countHitsBySearchPattern(input, 0, 0, 1, 1);

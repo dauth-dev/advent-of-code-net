@@ -1,13 +1,6 @@
-﻿using System.Linq;
-using AdventOfCode.Utils;
-using System;
-using AdventOfCode.Day_2.Models;
+﻿using System;
 using System.Collections.Generic;
-
-using System.Linq;
-
-using MoreLinq;
-using System.Text.RegularExpressions;
+using AdventOfCode.Utils;
 
 namespace AdventOfCode.Day_06
 {
@@ -19,7 +12,7 @@ namespace AdventOfCode.Day_06
 
         protected override void Process()
         {
-            var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(2020, 6);
+            var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day);
 
             var getGroups = GetGroups(input);
             var clearedData = GetClearedData(getGroups);

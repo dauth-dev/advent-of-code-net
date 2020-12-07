@@ -1,13 +1,8 @@
-﻿using System.Linq;
-using AdventOfCode.Utils;
-using System;
-using AdventOfCode.Day_2.Models;
+﻿using System;
 using System.Collections.Generic;
-
 using System.Linq;
-
+using AdventOfCode.Utils;
 using MoreLinq;
-using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Day_05
 {
@@ -19,7 +14,7 @@ namespace AdventOfCode.Day_05
 
         protected override void Process()
         {
-            var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(2020, 5);
+            var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day);
             var highestId = 0;
             foreach (var item in input)
             {
