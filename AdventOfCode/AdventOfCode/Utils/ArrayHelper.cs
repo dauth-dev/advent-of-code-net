@@ -1,18 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
 namespace AdventOfCode.Utils
 {
-    public interface IArrayHelper
-    {
-        Tuple<T, T> FindTwoItemsWith<T>(IEnumerable<T> numbers, Func<T, T, bool> operatorFunc);
-
-        Tuple<T, T, T> FindThreeItemsWith<T>(IEnumerable<T> numbers, Func<T, T, T, bool> operatorFunc);
-
-        IEnumerable<Tuple<T, T>> Join<T>(IEnumerable<T> first, IEnumerable<T> second);
-        IEnumerable<Tuple<T, T, T>> Join<T>(IEnumerable<T> first, IEnumerable<T> second, IEnumerable<T> third);
-    }
 
     public class ArrayHelper : IArrayHelper
     {
@@ -66,6 +58,22 @@ namespace AdventOfCode.Utils
 
             var joined = this.Join(first, second);
             return joined.SelectMany(i => third, (j, t) => Tuple.Create(j.Item1, j.Item2, t));
+        }
+
+        public BitArray ParseToBitArray(string value, char trueChar, char falseChar, bool ignoreCase = true)
+        {
+            if (ignoreCase)
+            {
+                value = value.ToLower();
+                trueChar = char.ToLower(trueChar);
+                falseChar = char.ToLower(falseChar);
+            }
+
+            var isValid = value.Select(s => s == trueChar || s == falseChar).All(v => v == true);
+            if (isValid == false) throw new InvalidOperationException("The String contains more chars as expected");
+
+            var result = new BitArray(value.Select(s => s == trueChar).ToArray());
+            return result;
         }
     }
 }

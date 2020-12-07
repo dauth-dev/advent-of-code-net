@@ -1,8 +1,7 @@
-﻿using AdventOfCode.Utils;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+using AdventOfCode.Utils;
 
 namespace AdventOfCode.Day_01
 {
@@ -10,9 +9,9 @@ namespace AdventOfCode.Day_01
     {
         public Runner() : base(1) { }
 
-        private async Task<IEnumerable<long>> LoadInput(string inputFile = "input")
+        private IEnumerable<long> LoadInput(string inputFile = "input")
         {
-            var input = await InputLoader.Instance.LoadInputAsEnumerableOfNumbers(2020, 1, inputFile);
+            var input = InputLoader.Instance.LoadInputAsEnumerableOfNumbers(Day, inputFile);
             Logger.Log($"{input.Count()} Input numbers found in file '{inputFile}'!");
 
             return input.OrderBy(i => i);
@@ -34,7 +33,7 @@ namespace AdventOfCode.Day_01
         protected override void Process()
         {
             var watch = Stopwatch.StartNew();
-            var orderdInput = LoadInput().Result;
+            var orderdInput = LoadInput();
 
             var first = FirstPart(orderdInput);
             Logger.Log($"The Result for the first part is: {first}!");
