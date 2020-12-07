@@ -1,14 +1,15 @@
-﻿using AdventOfCode.Utils;
-using FluentAssertions;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Xunit;
+using AdventOfCode.Utils;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AdventOfCodeTests.Utils
 {
+    [TestClass]
     public class ArrayHelperTest
     {
-        public IArrayHelper Sut { get; }
+        private IArrayHelper Sut { get; }
 
 
         public ArrayHelperTest()
@@ -16,7 +17,7 @@ namespace AdventOfCodeTests.Utils
             Sut = new ArrayHelper();
         }
 
-        [Fact]
+        [TestMethod]
         public void ArrayCanBeJoined()
         {
             var first = new List<int>() { 1, 2, 3 };
@@ -37,7 +38,7 @@ namespace AdventOfCodeTests.Utils
             actual.Should().BeEquivalentTo(expected, o => o.WithoutStrictOrdering());
         }
 
-        [Fact]
+        [TestMethod]
         public void Three_Arrays_can_be_joined()
         {
             var first = new List<int>() { 1, 2 };
@@ -58,7 +59,7 @@ namespace AdventOfCodeTests.Utils
 
         }
 
-        [Fact]
+        [TestMethod]
         public void An_Error_is_thrown_if_size_does_not_match()
         {
             var withItems = new List<int>() { 1, 2, 3 };
@@ -76,7 +77,7 @@ namespace AdventOfCodeTests.Utils
         }
 
 
-        [Fact]
+        [TestMethod]
         public void Found_Items_returns_the_correct_tuple() {
             var items = new List<int>() { 2, 3, 5 };
             var found = Sut.FindTwoItemsWith(items, (i, j) => i + j == 7);
