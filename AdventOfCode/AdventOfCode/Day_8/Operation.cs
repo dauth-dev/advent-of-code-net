@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using AdventOfCode.Utils;
 
 namespace AdventOfCode.Day_8
@@ -6,6 +7,7 @@ namespace AdventOfCode.Day_8
 	public abstract class Operation
 	{
 		public bool Processed { get; private set; }
+        public int Arg = 0;
 
 		public Tuple<int, int> ProcessOperation(int currentValue, int index)
 		{
@@ -59,7 +61,7 @@ namespace AdventOfCode.Day_8
 	public class JmpOperation : Operation
 	{
 		private readonly int maxOperations = 647;
-		private readonly int _jmpTo;
+		public readonly int _jmpTo;
 
 		public JmpOperation(int jmpTo)
 		{
@@ -83,7 +85,7 @@ namespace AdventOfCode.Day_8
 
 	public class NopOperation : Operation
 	{
-		private readonly int? _arg;
+		public readonly int? _arg;
 
 		public NopOperation(int? arg = null)
 		{

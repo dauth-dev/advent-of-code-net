@@ -1,45 +1,25 @@
 ﻿using System.Collections.Generic;
-using AdventOfCode.Utils;
 
 namespace AdventOfCode.Day_8
 {
     public class Accumulator
     {
         private readonly IList<Operation> _operations;
+        public int lastIndex = 0;
 
         public Accumulator(IList<Operation> operations)
         {
             _operations = operations;
         }
 
-        
-        public int Process(bool skipProcessed = true)
+        public int Process()
         {
             var index = 0;
-            int prevIndex = index;
             var currentValue = 0;
             var operation = _operations[index];
             bool finished;
-            var firstOperationWasProcessed = false;
             do
             {
-                if (skipProcessed)
-                {
-                    finished = operation.Processed;
-                }
-
-
-                if (operation.Processed)
-                {
-                    Logger.Log($"First Operation was processed at index {index}: {operation}");
-                    if (firstOperationWasProcessed == false)
-                    {
-                        //Console.Read();
-                        firstOperationWasProcessed = true;
-                    }
-
-
-                }
                 finished = operation.Processed;
                 if (!finished)
                 {
@@ -47,11 +27,10 @@ namespace AdventOfCode.Day_8
 
                     currentValue = next.Item1;
                     index = next.Item2;
-                    prevIndex = index;
-
+					
+                    lastIndex = index;
                     if (index >= _operations.Count)
                     {
-                        Logger.Log($"index : {index}; lastIndex: {prevIndex}");
                         finished = true;
                     }
                     else
@@ -63,10 +42,8 @@ namespace AdventOfCode.Day_8
 
             } while (finished == false);
 
-            Logger.Log($"index : {index}; lastIndex: {prevIndex}");
-            operation.Print();
-
             return currentValue;
         }
+
     }
 }

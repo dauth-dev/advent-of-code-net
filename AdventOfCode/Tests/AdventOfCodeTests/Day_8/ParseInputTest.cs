@@ -46,7 +46,7 @@ namespace AdventOfCodeTests.Day_8
 		[TestMethod]
 		public void Operation_can_be_created_by_string()
 		{
-			Operation.CreateFromLine("nop +0").Should().BeEquivalentTo(new NopOperation());
+			Operation.CreateFromLine("nop +0").Should().BeEquivalentTo(new NopOperation(0));
 			Operation.CreateFromLine("acc +1").Should().BeEquivalentTo(new AccOperation(1));
 			Operation.CreateFromLine("acc -10").Should().BeEquivalentTo(new AccOperation(-10));
 			Operation.CreateFromLine("jmp +1").Should().BeEquivalentTo(new JmpOperation(1));
