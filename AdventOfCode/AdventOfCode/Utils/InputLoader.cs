@@ -10,7 +10,7 @@ namespace AdventOfCode.Utils
     {
 
 
-        const string BaseFolder = ".\\";
+        const string BaseFolder = @"D:\GIT\advent-of-code-net\AdventOfCode\AdventOfCode\";
         private readonly AppSettings appSettings = new AppSettings();
         public static readonly IInputLoader Instance = new InputLoader();
 

@@ -1,75 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using AdventOfCode.Utils;
+﻿using System.Collections.Generic;
 
 namespace AdventOfCode.Day_8
 {
-	public class Accumulator
-	{
-		private readonly IList<Operation> _operations;
+    public class Accumulator
+    {
+        private readonly IList<Operation> _operations;
+        public int lastIndex = 0;
 
-		public Accumulator(IList<Operation> operations)
-		{
-			_operations = operations;
-		}
+        public Accumulator(IList<Operation> operations)
+        {
+            _operations = operations;
+        }
 
-		public int Process(bool skipProcessed = true)
-		{
-			var index = 0;
-			int prevIndex = index;
+        public int Process()
+        {
+            var index = 0;
+            var currentValue = 0;
+            var operation = _operations[index];
+            bool finished;
+            do
+            {
+                finished = operation.Processed;
+                if (!finished)
+                {
+                    var next = operation.ProcessOperation(currentValue, index);
 
-			var currentValue = 0;
-			var operation = _operations[index];
-			var finished = false;
+                    currentValue = next.Item1;
+                    index = next.Item2;
+                    lastIndex = index;
+                    if (index >= _operations.Count)
+                    {
+                        finished = true;
+                    }
+                    else
+                    {
+                        operation = _operations[index];
+                    }
 
-			var firstOperationWasProcessed = false;
+                }
 
-			do
-			{
-				if (skipProcessed)
-				{
-					finished = operation.Processed;
-				}
+            } while (finished == false);
 
+            return currentValue;
+        }
 
-				if (operation.Processed)
-				{
-					Logger.Log($"First Operation was processed at index {index}: {operation}");
-					if (firstOperationWasProcessed == false)
-					{
-						Console.ReadKey();
-						firstOperationWasProcessed = true;
-					}
-
-
-				}
-
-				if (!finished)
-				{
-					var next = operation.ProcessOperation(currentValue, index);
-
-					currentValue = next.Item1;
-					prevIndex = index;
-					index = next.Item2;
-
-					if (index >= _operations.Count)
-					{
-						Logger.Log($"index : {index}; lastIndex: {prevIndex}");
-						finished = true;
-					}
-					else
-					{
-						operation = _operations[index];
-					}
-
-				}
-
-			} while (finished == false);
-
-			Logger.Log($"index : {index}; lastIndex: {prevIndex}");
-			operation.Print();
-
-			return currentValue;
-		}
-	}
+    }
 }

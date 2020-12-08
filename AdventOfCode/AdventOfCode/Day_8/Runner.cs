@@ -19,17 +19,74 @@ namespace AdventOfCode.Day_08
 
 		protected override void Process()
 		{
-			//Part1();
+			// Part1();
 			Part2();
 		}
 
 		private void Part2()
 		{
-			var operations = ParseInput(InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day, "input-part2"));
+			var operations = ParseInput(InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day));
+            var opCount = operations.Count();
+            int testedLine = 0;
 
-			var accumulator = new Accumulator(operations.ToList());
-			var result = accumulator.Process(false);
-			Logger.Log($"Second Part: {result}");
+            bool found = false;
+            int result = 0;
+			// jmp prüfen
+            while (!found && testedLine < opCount)
+            {
+                List<Operation> opList = operations.ToList();
+                if (opList[testedLine].GetType() == typeof(JmpOperation))
+                {
+                    opList[testedLine] = new NopOperation();
+                    var accumulator = new Accumulator(opList);
+                    result = accumulator.Process();
+                    if (accumulator.lastIndex >= opList.Count)
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        // nicht gefunden
+                        testedLine++;
+                    }
+                }
+                else
+                {
+                    testedLine++;
+                }
+
+            }
+
+            Logger.Log($"Second Part: {result}");
+
+            testedLine = 0;
+            // nop prüfen
+            while (!found && testedLine < opCount)
+            {
+                List<Operation> opList = operations.ToList();
+                if (opList[testedLine].GetType() == typeof(NopOperation))
+                {
+                    opList[testedLine] = new JmpOperation(Convert.ToInt32(((NopOperation) opList[testedLine])._arg));
+                    var accumulator = new Accumulator(opList);
+                    result = accumulator.Process();
+                    if (accumulator.lastIndex >= opList.Count)
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        // nicht gefunden
+                        testedLine++;
+                    }
+                }
+                else
+                {
+                    testedLine++;
+                }
+
+            }
+
+            Logger.Log($"Second Part: {result}");
 		}
 
 		private void Part1()
