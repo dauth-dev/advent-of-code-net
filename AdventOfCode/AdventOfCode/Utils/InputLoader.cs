@@ -10,7 +10,7 @@ namespace AdventOfCode.Utils
     {
 
 
-        const string BaseFolder = @"D:\GIT\advent-of-code-net\AdventOfCode\AdventOfCode\";
+        const string BaseFolder = ".\\";
         private readonly AppSettings appSettings = new AppSettings();
         public static readonly IInputLoader Instance = new InputLoader();
 
@@ -32,7 +32,7 @@ namespace AdventOfCode.Utils
             var file = getFileName(day, fileName);
             if (!File.Exists(file))
             {
-                throw new FileNotFoundException($"Input file '{file}' was not found in folder '{Directory.GetCurrentDirectory()}'!");
+                throw new FileNotFoundException($"Input file '{file}' was not found in folder '{Directory.GetCurrentDirectory()}. Please try to include the file to the build with 'Copy to Output Directory' = 'Copy Always | Copy If newer'!");
             }
 
             return File.ReadAllLines(file);
