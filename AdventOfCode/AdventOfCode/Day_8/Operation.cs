@@ -1,4 +1,5 @@
 ﻿using System;
+using AdventOfCode.Utils;
 
 namespace AdventOfCode.Day_8
 {
@@ -24,11 +25,16 @@ namespace AdventOfCode.Day_8
 			{
 				"acc" => new AccOperation(arg),
 				"jmp" => new JmpOperation(arg),
-				"nop" => new NopOperation(),
-				_ => new NopOperation()
+				"nop" => new NopOperation(arg),
+				_ => new NopOperation(arg)
 			};
 
 			return result;
+		}
+
+		public void Print()
+		{
+			Logger.Log(this.ToString());
 		}
 	}
 
@@ -46,10 +52,13 @@ namespace AdventOfCode.Day_8
 		{
 			return Tuple.Create(currentValue + _accWith, index + 1);
 		}
+
+		public override string ToString() => $"acc {_accWith}";
 	}
 
 	public class JmpOperation : Operation
 	{
+		private readonly int maxOperations = 647;
 		private readonly int _jmpTo;
 
 		public JmpOperation(int jmpTo)
@@ -59,15 +68,33 @@ namespace AdventOfCode.Day_8
 
 		protected override Tuple<int, int> Process(int currentValue, int index)
 		{
+			var newIndex = index + _jmpTo;
+			if (newIndex < 0 || newIndex > maxOperations)
+			{
+				Logger.Log($"invalid jmp operation at index {index}: {ToString()}");
+			}
+			Logger.Log($"index: {index} => {ToString()}");
+
 			return Tuple.Create(currentValue, index + _jmpTo);
 		}
+
+		public override string ToString() => $"jmp {_jmpTo}";
 	}
 
 	public class NopOperation : Operation
 	{
+		private readonly int? _arg;
+
+		public NopOperation(int? arg = null)
+		{
+			_arg = arg;
+		}
+
 		protected override Tuple<int, int> Process(int currentValue, int index)
 		{
-			return Tuple.Create(currentValue, index+1);
+			return Tuple.Create(currentValue, index + 1);
 		}
+
+		public override string ToString() => $"nop {_arg}";
 	}
 }
