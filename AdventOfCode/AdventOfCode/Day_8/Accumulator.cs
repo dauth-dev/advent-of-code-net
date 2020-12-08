@@ -27,6 +27,7 @@ namespace AdventOfCode.Day_8
 
                     currentValue = next.Item1;
                     index = next.Item2;
+					
                     lastIndex = index;
                     if (index >= _operations.Count)
                     {
