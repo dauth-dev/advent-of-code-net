@@ -13,7 +13,8 @@ namespace AdventOfCode
 			 new Day_05.Runner(),
 			 new Day_06.Runner(),
 			 new Day_07.Runner(),
-			 new  Day_08.Runner()
+			 new  Day_08.Runner(),
+             new  Day_09.Runner()
 		};
 
 		public static void Main()

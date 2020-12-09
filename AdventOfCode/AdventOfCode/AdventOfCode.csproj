@@ -11,6 +11,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Day_9\input_ml.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Day_9\input_ml.txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<Folder Include="Day_1\Models\" />
 	</ItemGroup>
 
