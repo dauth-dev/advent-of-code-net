@@ -45,7 +45,7 @@ namespace AdventOfCode.Day_09
             int startIndex = 0;
             int endIndex = 0;
             bool found = false;
-            for (int i = 0; i < input.Count; i++)
+            for (int i = 0; i < input.Count - 1; i++)
             {
                 if (found)
                 {
@@ -53,7 +53,7 @@ namespace AdventOfCode.Day_09
                 }
                 long tempSum = input[i];
                 startIndex = i;
-                for (int j = i + 1; j < input.Count - 1; j++)
+                for (int j = i + 1; j < input.Count; j++)
                 {
                     tempSum += input[j];
                     if (tempSum > _firstinvalidnumer)
