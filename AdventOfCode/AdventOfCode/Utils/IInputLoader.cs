@@ -10,5 +10,8 @@ namespace AdventOfCode.Utils
 
         List<BitArray> LoadInputAsBitMatrix(int day, string fileName = null, string falseChar = ".", string trueChar = "#");
         string LoadInputAsText(int day, string fileName = null);
+
+        public List<List<int>> LoadInputAsTriStateMatrix(int day, string fileName = null, string negativeChar = ".",
+            string naChar = "L", string positiveChar = "#");
     }
 }

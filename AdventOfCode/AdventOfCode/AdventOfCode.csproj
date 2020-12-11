@@ -12,11 +12,15 @@
 
 	<ItemGroup>
 	  <None Remove="Day_10\input_ml.txt" />
+	  <None Remove="Day_11\input_ml.txt" />
 	  <None Remove="Day_9\input_ml.txt" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Content Include="Day_10\input_ml.txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Day_11\input_ml.txt">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Day_9\input_ml.txt">
