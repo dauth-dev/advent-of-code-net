@@ -84,7 +84,62 @@ namespace AdventOfCode.Day_12
 
 		private void Part2()
 		{
+			var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day);
+			var East = 0;
+			var North = 0;
+			var wayPointEast = 10;
+			var wayPointNorth = 1;
+			var Angle = 90; // Start nach Osten
+			foreach (var ins in input)
+			{
+				var command = ins[0].ToString();
+				var movement = Convert.ToInt32(ins.Substring(1));
+				switch (command)
+				{
+					case "N":
+						wayPointNorth += movement;
+						break;
+					case "S":
+						wayPointNorth -= movement;
+						break;
+					case "E":
+						wayPointEast += movement;
+						break;
+					case "W":
+						wayPointEast -= movement;
+						break;
+					case "R":
+					case "L":
+						if (movement == 180)
+						{
+							wayPointNorth *= -1;
+							wayPointEast *= -1;
+						}
+						else
+						{
+							var temp = wayPointNorth;
+							wayPointNorth = wayPointEast;
+							wayPointEast = temp;
+							if (command == "L" && movement == 90 || command == "R" && movement == 270)
+							{
+								wayPointEast *= -1;
+							}
+							else
+							{
+								wayPointNorth *= -1;
+							}
+						}
+						break;
+					case "F":
+						North += wayPointNorth * movement;
+						East += wayPointEast * movement;
+						break;
+				}
+			}
 
-        }
+			var northing = North;
+			var easting = East;
+			Logger.Log($"´Second Part: {Math.Abs(easting) + Math.Abs(northing)}");
+		}
     }
 }
