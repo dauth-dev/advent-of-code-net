@@ -50,7 +50,31 @@ namespace AdventOfCode.Day_13
 
 		private void Part2()
 		{
+			var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day).ToArray();
+			var times = input[1].Split(',');
 
-        }
-    }
+			var offset = long.Parse(times[0]);
+			var increment = offset;
+			for (int i = 1; i < times.Length; i++)
+			{
+				if (times[i] == "x") continue;
+
+				var curTime = long.Parse(times[i]);
+				var modulo = curTime - (i % curTime);
+				while (offset % curTime != modulo)
+					offset += increment;
+				increment = lcm(increment, curTime);
+			}
+			Logger.Log($"Second Part: {offset}");
+		}
+
+		public static long gcd(long a, long b)
+		{
+			while (b != 0) b = a % (a = b);
+			return a;
+		}
+
+		public static long lcm(long a, long b) =>
+			a * b / gcd(a, b);
+	}
 }
