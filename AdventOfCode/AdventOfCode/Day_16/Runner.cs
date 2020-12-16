@@ -26,6 +26,7 @@ namespace AdventOfCode.Day_16
             var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day).ToList();
             dataInput = new inputTickets();
 
+            /*
             input.Clear();
             input.Add("class: 1-3 or 5-7");
             input.Add("row: 6-11 or 33-44");
@@ -39,6 +40,7 @@ namespace AdventOfCode.Day_16
             input.Add("40,4,50");
             input.Add("55,2,20");
             input.Add("38,6,12");
+            */
             
             var section = "prop";
 
@@ -79,6 +81,7 @@ namespace AdventOfCode.Day_16
                             {
                                 dataInput.nearbyTickes.Add(Convert.ToInt32(x));
                             }
+                            dataInput.nearbyTickesAsString.Add(line);
                             break;
                     }
                 }
@@ -127,7 +130,7 @@ namespace AdventOfCode.Day_16
 
 		private void Part2()
 		{
-
+            
         }
     }
 
@@ -136,6 +139,7 @@ namespace AdventOfCode.Day_16
         public Dictionary<string,string> properties = new Dictionary<string, string>();
         public List<int> ticket = new List<int>();
         public List<int> nearbyTickes = new List<int>();
+        public List<string> nearbyTickesAsString = new List<string>();
         public List<int> validNearbyTickes = new List<int>();
         public List<int> validPropNumbers = new List<int>();
     }
