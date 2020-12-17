@@ -18,6 +18,8 @@ namespace AdventOfCode.Day_17
 
 		protected override void Process()
 		{
+            // some Background for the rules see https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+
             // aktiv = #, inaktiv = .
             var input = InputLoader.Instance.LoadInputAsBitMatrix(Day);
             // 3D-Würfel aufbauen x/y/z. Das bitARray ist die unterste Scheibe
@@ -108,7 +110,7 @@ namespace AdventOfCode.Day_17
                             }
                         }
                     } // k (z-Achse)
-                } // (j (y-Achse))
+                } // j (y-Achse))
             } // i (x-Achse)
 
             return retList;
