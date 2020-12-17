@@ -21,7 +21,7 @@ namespace AdventOfCode.Day_17
             // aktiv = #, inaktiv = .
             var input = InputLoader.Instance.LoadInputAsBitMatrix(Day);
             // 3D-Würfel aufbauen x/y/z. Das bitARray ist die unterste Scheibe
-            // 4D-Würfel aufbauen x/y/z. Der 3D-Würfel ist die unterste "Scheibe"
+            // 4D-Würfel aufbauen x/y/z/w. Der 3D-Würfel ist die unterste "Scheibe"
             for (int i = 0; i < input.Count; i++)
             {
                 for (int j = 0; j < input[0].Count; j++)
@@ -37,19 +37,19 @@ namespace AdventOfCode.Day_17
 
         private void Part1()
         {
-            // 3D FAll
+            // 3D Fall
             var cubeModified = new Dictionary<(int x, int y, int z), bool>();
             for (int i=0; i < loops; i++)
             {
-                foreach (var cubeItem in conwayCube3D)
+                foreach (var cubeItem in conwayCube3D)      // alle 3D - Koordinaten aka 8 * 8 * 1 = 64 Stück
                 {
-                    var itemNeighborStates = Neightbors3D(cubeItem.Key, conwayCube3D);
+                    var itemNeighborStates = Neighbors3D(cubeItem.Key, conwayCube3D);
 
                     foreach (var neighbor in itemNeighborStates)
                     {
                         // Achtung: die Nachbarn der Nachbarn beeinflussen das Ergebnis
                         // If a cube is inactive but exactly 3 of its neighbors are active, the cube becomes active
-                        var neighborsOfNeighbors = Neightbors3D(neighbor.Key, conwayCube3D).Where(e => conwayCube3D.ContainsKey(e.Key));
+                        var neighborsOfNeighbors = Neighbors3D(neighbor.Key, conwayCube3D).Where(e => conwayCube3D.ContainsKey(e.Key));
 
                         if (neighborsOfNeighbors.Count(e => e.Value == true) == 3)
                         {
@@ -79,7 +79,7 @@ namespace AdventOfCode.Day_17
             Logger.Log($"First Part: {countActiveCubes}");
         }
 
-        protected static Dictionary<(int x, int y, int z), bool> Neightbors3D((int x, int y, int z) gridCoord, Dictionary<(int x, int y, int z), bool> currentCube)
+        protected static Dictionary<(int x, int y, int z), bool> Neighbors3D((int x, int y, int z) gridCoord, Dictionary<(int x, int y, int z), bool> currentCube)
         {
             var retList = new Dictionary<(int x, int y, int z), bool>();
 
@@ -107,14 +107,14 @@ namespace AdventOfCode.Day_17
                                 retList.Add((i, j, k), false);
                             }
                         }
-                    }
-                }
-            }
+                    } // k (z-Achse)
+                } // (j (y-Achse))
+            } // i (x-Achse)
 
             return retList;
         }
 
-        protected static Dictionary<(int x, int y, int z, int w), bool> Neightbors4D((int x, int y, int z, int w) gridCoord, Dictionary<(int x, int y, int z, int w), bool> currentCube)
+        protected static Dictionary<(int x, int y, int z, int w), bool> Neighbors4D((int x, int y, int z, int w) gridCoord, Dictionary<(int x, int y, int z, int w), bool> currentCube)
         {
             var retList = new Dictionary<(int x, int y, int z, int w), bool>();
 
@@ -145,10 +145,10 @@ namespace AdventOfCode.Day_17
                                     retList.Add((i, j, k, l), false);
                                 }
                             }
-                        } // l (w)
-                    } // k (z)
-                } // j (y)
-            } // i (x)
+                        } // l (w-Achse)
+                    } // k (z-Achse)
+                } // j (y-Achse)
+            } // i (x-Achse)
             return retList;
         }
 
@@ -158,15 +158,15 @@ namespace AdventOfCode.Day_17
             var cubeModified = new Dictionary<(int x, int y, int z, int w), bool>();
             for (int i = 0; i < loops; i++)
             {
-                foreach (var cubeItem in conwayCube4D)
+                foreach (var cubeItem in conwayCube4D) // wie im 3D Fall 8 * 8 * 1 * 1 = 64 Mini-Kubes, aber mit entsprechend mehr Nachbarn
                 {
-                    var itemNeighborStates = Neightbors4D(cubeItem.Key, conwayCube4D);
+                    var itemNeighborStates = Neighbors4D(cubeItem.Key, conwayCube4D);
 
                     foreach (var neighbor in itemNeighborStates)
                     {
                         // Achtung: die Nachbarn der Nachbarn beeinflussen das Ergebnis
                         // If a cube is inactive but exactly 3 of its neighbors are active, the cube becomes active
-                        var neighborsOfNeighbors = Neightbors4D(neighbor.Key, conwayCube4D).Where(e => conwayCube4D.ContainsKey(e.Key));
+                        var neighborsOfNeighbors = Neighbors4D(neighbor.Key, conwayCube4D).Where(e => conwayCube4D.ContainsKey(e.Key));
 
                         if (neighborsOfNeighbors.Count(e => e.Value == true) == 3)
                         {
