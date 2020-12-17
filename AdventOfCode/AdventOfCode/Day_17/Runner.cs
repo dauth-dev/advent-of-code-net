@@ -118,7 +118,8 @@ namespace AdventOfCode.Day_17
         {
             var retList = new Dictionary<(int x, int y, int z, int w), bool>();
 
-            // Nachbarkoordinaten 3 * 3 * 3 - 1 (Originalwürfel in der Mitte) = 26 Stati
+            // Nachbarkoordinaten 3 * 3 * 3 * 3 - 1 (Originalwürfel in der Mitte) = 80 Stati
+            // (möglicher Generalisierungsansatz auf N Dimensionen siehe https://de.mathworks.com/matlabcentral/fileexchange/29330-neighbour-points-in-a-matrix)
             for (int i = gridCoord.x - 1; i <= gridCoord.x + 1; i++)
             {
                 for (int j = gridCoord.y - 1; j <= gridCoord.y + 1; j++)
@@ -155,7 +156,7 @@ namespace AdventOfCode.Day_17
 		{
             // 4D Fall
             var cubeModified = new Dictionary<(int x, int y, int z, int w), bool>();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < loops; i++)
             {
                 foreach (var cubeItem in conwayCube4D)
                 {
