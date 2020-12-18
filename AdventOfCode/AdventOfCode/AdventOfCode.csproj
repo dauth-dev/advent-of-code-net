@@ -49,11 +49,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" />
 		<PackageReference Include="morelinq" Version="3.3.2" />
 		<PackageReference Include="QuikGraph" Version="2.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Day_18\input_ml.txt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Day_7\input.txt">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
