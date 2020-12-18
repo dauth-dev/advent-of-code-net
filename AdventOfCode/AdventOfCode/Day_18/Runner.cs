@@ -9,19 +9,21 @@ namespace AdventOfCode.Day_18
 {
 	public class Runner : AbstractRunner
 	{
+		List<string> input;
+
 		public Runner() : base(18)
 		{
 		}
 
 		protected override void Process()
 		{
+			input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day).ToList();
 			Part1();
 			Part2();
 		}
 
         private void Part1()
         {
-			var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day).ToList();
 			/*
 			string test = "1 + (2 * 3) + (4 * (5 + 6))";
 			/*
@@ -38,21 +40,19 @@ namespace AdventOfCode.Day_18
 			long sum = 0;
 			foreach (var line in input)
 			{
-				var test = line.Replace("*", "-");
-				sum += fakeMath(SyntaxFactory.ParseExpression(test));
+				sum += fakeMath(SyntaxFactory.ParseExpression(line.Replace("*", "-")));
 			}
 			Logger.Log($"First Part: {sum}");
 		}
 
 		private void Part2()
 		{
-			var input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day).ToList();
+			input = InputLoader.Instance.LoadInputAsEnumerableOfStrings(Day).ToList();
 			long sum = 0;
 			foreach (var line in input)
 			{
 				// das gleiche in grün nur diesmal mit Addition vor Multiplikation d.h. aus dem + müssen wir ein * machen das dann in fakeMath auf ein + gemappt wird :)
-				var test = line.Replace("*", "-").Replace("+", "*");
-				sum += fakeMath(SyntaxFactory.ParseExpression(test));
+				sum += fakeMath(SyntaxFactory.ParseExpression(line.Replace("*", "-").Replace("+", "*")));
 			}
 			Logger.Log($"Second Part: {sum}");
 		}
@@ -77,12 +77,12 @@ namespace AdventOfCode.Day_18
 				{
 					case SyntaxKind.AddExpression:
 						return fakeMath(bs.Left) + fakeMath(bs.Right);
-					case SyntaxKind.SubtractExpression:
-						// wir ersetzen zuvor im Ursprungsausdruck das * mit - wegen der Precedence
-						return fakeMath(bs.Left) * fakeMath(bs.Right);
 					case SyntaxKind.MultiplyExpression:
 						// das ist unser gefaktes multiply
 						return fakeMath(bs.Left) + fakeMath(bs.Right);
+					case SyntaxKind.SubtractExpression:
+						// wir ersetzen zuvor im Ursprungsausdruck das * mit - wegen der Precedence
+						return fakeMath(bs.Left) * fakeMath(bs.Right);
 					default:
 						throw new NotImplementedException();
 				}
