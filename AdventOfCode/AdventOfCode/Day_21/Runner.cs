@@ -81,6 +81,36 @@ The first step is to determine which ingredients can't possibly contain any of t
              * ingredient list.) In the above example, this would be mxmxvkd,sqjhc,fvjkl.    
              * 
              * */
+
+            // das sind die 8 Stück die wir schon in Teil 1 gesehen haben
+            while (allergenMapping.Values.Any(x => x.Count != 1))
+            {
+                foreach (var x in allergenMapping.Keys)
+                {
+                    var allergenOfX = allergenMapping[x];
+                    if (allergenOfX.Count != 1)
+                    {
+                        continue;
+                    }
+
+                    foreach (var test in allergenMapping)
+                    {
+                        if (test.Key == x)
+                        {
+                            // nicht sich selbst
+                            continue;
+                        }
+
+                        // entferne die aktuelle Value
+                        allergenMapping[test.Key] = test.Value.Where(x => x != allergenOfX.First()).ToHashSet();
+                    }
+                }
+            }
+
+            var resultList = allergenMapping.OrderBy(x => x.Key).Select(x => x.Value.First());
+            string[] result2 = new string[resultList.Count()];
+            result2 = resultList.ToArray();
+            Logger.Log($"Second Part: {string.Join(",", result2)}");
         }
 
         private void LoadData()
