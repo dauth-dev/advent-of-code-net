@@ -62,23 +62,23 @@ namespace AdventOfCode.Day_24
 							position = (position.Item1, position.Item2 + 1);
 							break;
 					}
-					if (grid.ContainsKey(position))
+				} // foreach instruction
+				if (grid.ContainsKey(position))
+				{
+					if (grid[position] == true)
 					{
-						if (grid[position] == true)
-                        {
-							grid[position] = false;
-                        }
-						else
-                        {
-							grid[position] = true;
-                        }
+						grid[position] = false;
 					}
 					else
 					{
-						// draufgetreten wird zu schwarz
-						grid.Add(position, true);
+						grid[position] = true;
 					}
-				} // foreach instruction
+				}
+				else
+				{
+					// draufgetreten wird zu schwarz
+					grid.Add(position, true);
+				}
 			} // foreach
 			int counter = grid.Count(x => x.Value == true);
 
