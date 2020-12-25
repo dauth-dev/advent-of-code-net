@@ -27,9 +27,9 @@ namespace AdventOfCode
 			  new  Day_19.Runner(),
 			  new  Day_20.Runner(),
 			  new  Day_21.Runner(),
-			  new  Day_22.Runner() /*,
+			  new  Day_22.Runner(),
 			  new  Day_23.Runner(),
-			  new  Day_24.Runner(),
+			  new  Day_24.Runner() /*,
 			  new  Day_25.Runner()
 			  */
 		};

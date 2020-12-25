@@ -89,7 +89,6 @@ namespace AdventOfCode.Day_12
 			var North = 0;
 			var wayPointEast = 10;
 			var wayPointNorth = 1;
-			var Angle = 90; // Start nach Osten
 			foreach (var ins in input)
 			{
 				var command = ins[0].ToString();
